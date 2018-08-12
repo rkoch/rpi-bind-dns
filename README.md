@@ -13,7 +13,7 @@
   - [Shell Access](#shell-access)
 
 # Introduction
-This is a Bind DNS Server container for docker on Raspberry Pi.
+This is a Bind DNS Server container for docker on alpine linux on Raspberry Pi.
 Forked from [mastermindg/rpi-dns](https://github.com/mastermindg/rpi-dns) who in turn forked it from
 [sameersbn/bind](https://github.com/sameersbn/docker-bind).
 
