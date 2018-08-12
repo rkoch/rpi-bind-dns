@@ -1,6 +1,4 @@
-[![Circle CI](https://circleci.com/gh/sameersbn/docker-bind.svg?style=shield)](https://circleci.com/gh/sameersbn/docker-bind) [![Docker Repository on Quay.io](https://quay.io/repository/sameersbn/bind/status "Docker Repository on Quay.io")](https://quay.io/repository/sameersbn/bind)
-
-# mastermindg/rpi-dns:latest
+# lauster/rpi-bind-dns:latest
 
 - [Introduction](#introduction)
   - [Contributing](#contributing)
@@ -15,10 +13,11 @@
   - [Shell Access](#shell-access)
 
 # Introduction
+Forked from mastermindg/rpi-dns who in turn forked it from
+sameersbn/bind - Bind DNS server for Raspberry Pi on Docker.
 
-Forked from sameersbn/bind - DNS for Raspberry Pi's over Docker
-
-`Dockerfile` to create a [Docker](https://www.docker.com/) container image for [BIND](https://www.isc.org/downloads/bind/) DNS server bundled with the [Webmin](http://www.webmin.com/) interface.
+`Dockerfile` to create a [Docker](https://www.docker.com/) container image for [BIND](https://www.isc.org/downloads/bind/) DNS server.
+The mastermindg image originally had webmin installed also, but I have ripped that out.
 
 BIND is open source software that implements the Domain Name System (DNS) protocols for the Internet. It is a reference implementation of those protocols, but it is also production-grade software, suitable for use in high-volume and high-reliability applications.
 
@@ -28,7 +27,6 @@ If you find this image useful here's how you can help:
 
 - Send a pull request with your awesome features and bug fixes
 - Help users resolve their [issues](../../issues?q=is%3Aopen+is%3Aissue).
-- Support the development of this image with a [donation](http://www.damagehead.com/donate/)
 
 ## Issues
 
@@ -46,7 +44,7 @@ If the above recommendations do not help then [report your issue](../../issues/n
 
 ## Installation
 
-Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/sameersbn/bind) and is the recommended method of installation.
+Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/lauster/bind) and is the recommended method of installation.
 
 > **Note**: Builds are also available on [Quay.io](https://quay.io/repository/sameersbn/bind)
 
@@ -71,13 +69,6 @@ docker run --name bind -d --restart=always \
   sameersbn/bind:latest
 ```
 
-*Alternatively, you can use the sample [docker-compose.yml](docker-compose.yml) file to start the container using [Docker Compose](https://docs.docker.com/compose/)*
-
-When the container is started the [Webmin](http://www.webmin.com/) service is also started and is accessible from the web browser at http://localhost:10000. Login to Webmin with the username `root` and password `password`. Specify `--env ROOT_PASSWORD=secretpassword` on the `docker run` command to set a password of your choosing.
-
-The launch of Webmin can be disabled by adding `--env WEBMIN_ENABLED=false` to the `docker run` command. Note that the `ROOT_PASSWORD` parameter has no effect when the launch of Webmin is disabled.
-
-Read the blog post [Deploying a DNS Server using Docker](http://www.damagehead.com/blog/2015/04/28/deploying-a-dns-server-using-docker/) for an example use case.
 
 ## Command-line arguments
 
@@ -85,9 +76,9 @@ You can customize the launch command of BIND server by specifying arguments to `
 
 ```bash
 docker run --name bind -it --rm \
-  --publish 53:53/udp --publish 10000:10000 \
+  --publish 53:53/udp --publish 53:53/tcp \
   --volume /srv/docker/bind:/data \
-  sameersbn/bind:latest -h
+  lauster/rpi-bind-dns:latest -h
 ```
 
 ## Persistence
@@ -112,19 +103,19 @@ To upgrade to newer releases:
   1. Download the updated Docker image:
 
   ```bash
-  docker pull sameersbn/bind:latest
+  docker pull lauster/rpi-bind-dns:latest
   ```
 
   2. Stop the currently running image:
 
   ```bash
-  docker stop bind
+  docker stop rpi-bind-dns
   ```
 
   3. Remove the stopped container
 
   ```bash
-  docker rm -v bind
+  docker rm -v rpi-bind-dns
   ```
 
   4. Start the updated image
@@ -132,7 +123,7 @@ To upgrade to newer releases:
   ```bash
   docker run -name bind -d \
     [OPTIONS] \
-    sameersbn/bind:latest
+    lauster/rpi-bind-dns:latest
   ```
 
 ## Shell Access
