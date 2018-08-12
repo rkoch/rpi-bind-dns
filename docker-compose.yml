@@ -1,7 +1,8 @@
 Bind:
-  image: mastermindg/rpi-dns:latest
+  image: lauster/rpi-bind-dns:latest
   ports:
     - "53:53/udp"
+    - "53:53/tcp"
   volumes:
     - /srv/docker/bind:/data
-  restart: always
+  restart: on-failure:5
