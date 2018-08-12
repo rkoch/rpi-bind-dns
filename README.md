@@ -13,10 +13,10 @@
   - [Shell Access](#shell-access)
 
 # Introduction
-Forked from mastermindg/rpi-dns who in turn forked it from
-sameersbn/bind - This is a Bind DNS Server for docker on Raspberry Pi.
+Forked from [mastermindg/rpi-dns](https://github.com/mastermindg/rpi-dns) who in turn forked it from
+[sameersbn/bind](https://github.com/sameersbn/docker-bind) - This is a Bind DNS Server for docker on Raspberry Pi.
 
-`Dockerfile` to create a [Docker](https://www.docker.com/) container image for [BIND](https://www.isc.org/downloads/bind/) DNS server.
+The `Dockerfile` is used to create a [Docker](https://www.docker.com/) container image for [BIND](https://www.isc.org/downloads/bind/) DNS server.
 The image originally had webmin installed also, but I have ripped that out since I don't need it.
 
 BIND is open source software that implements the Domain Name System (DNS) protocols for the Internet. It is a reference implementation of those protocols, but it is also production-grade software, suitable for use in high-volume and high-reliability applications.
