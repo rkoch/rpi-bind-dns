@@ -13,12 +13,12 @@
   - [Shell Access](#shell-access)
 
 # Introduction
-This is a Bind DNS Server container for docker on alpine linux on Raspberry Pi.
-Forked from [mastermindg/rpi-dns](https://github.com/mastermindg/rpi-dns) who in turn forked it from
+This is a Bind DNS Server container for docker on alpine linux which can run on Raspberry Pi (or whereever)
+It is Forked from [mastermindg/rpi-dns](https://github.com/mastermindg/rpi-dns) who in turn forked it from
 [sameersbn/bind](https://github.com/sameersbn/docker-bind).
 
 The `Dockerfile` is used to create a [Docker](https://www.docker.com/) container image for [BIND](https://www.isc.org/downloads/bind/) DNS server.
-The image originally had webmin installed also, but I have removed it, since I have no use for it.
+The image originally had webmin installed also, but I removed it, since I have no use for it.
 
 [BIND](https://www.isc.org/downloads/bind/) is open source software that implements the Domain Name System (DNS) protocols for the Internet. It is a reference implementation of those protocols, but it is also production-grade software, suitable for use in high-volume and high-reliability applications.
 
@@ -45,18 +45,17 @@ If the above recommendations do not help then [report your issue](../../issues/n
 
 ## Installation
 
-Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/lauster/bind) and is the recommended method of installation.
+Automated builds of the image are available on [Dockerhub](https://hub.docker.com/r/lauster/rpi-bind-dns) and is the recommended method of installation.
 
-> **Note**: Builds are also available on [Quay.io](https://quay.io/repository/sameersbn/bind)
 
 ```bash
-docker pull sameersbn/bind:latest
+docker pull lauster/rpi-bind-dns:latest
 ```
 
 Alternatively you can build the image yourself.
 
 ```bash
-docker build -t sameersbn/bind github.com/sameersbn/docker-bind
+docker build -t lauster/rpi-bind-dns github.com/lauster/rpi-bind-dns
 ```
 
 ## Quickstart
@@ -67,7 +66,7 @@ Start BIND using:
 docker run --name bind -d --restart=always \
   --publish 53:53/udp --publish 10000:10000 \
   --volume /srv/docker/bind:/data \
-  sameersbn/bind:latest
+  lauster/rpi-bind-dns:latest
 ```
 
 
@@ -84,7 +83,7 @@ docker run --name bind -it --rm \
 
 ## Persistence
 
-For the BIND to preserve its state across container shutdown and startup you should mount a volume at `/data`.
+For BIND to preserve its state across container shutdown and startup you should mount a volume at `/data`.
 
 > *The [Quickstart](#quickstart) command already mounts a volume for persistence.*
 
@@ -122,7 +121,7 @@ To upgrade to newer releases:
   4. Start the updated image
 
   ```bash
-  docker run -name bind -d \
+  docker run -name rpi-bind-dns -d \
     [OPTIONS] \
     lauster/rpi-bind-dns:latest
   ```
@@ -132,5 +131,5 @@ To upgrade to newer releases:
 For debugging and maintenance purposes you may want access the containers shell. If you are using Docker version `1.3.0` or higher you can access a running containers shell by starting `bash` using `docker exec`:
 
 ```bash
-docker exec -it bind bash
+docker exec -it lauster/rpi-bind-dns /bin/bash
 ```
