@@ -1,5 +1,4 @@
-FROM alpine:latest
-MAINTAINER lauster@lauster.dk
+FROM arm32v7/alpine:latest
 
 ENV DATA_DIR=/data \
     BIND_USER=named
